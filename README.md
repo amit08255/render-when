@@ -18,7 +18,7 @@ It works similar to if-else and switch case. If first condition gets true in the
 | **Prop Name** | **Is Required** | **Default Value** |
 |---------------|-----------------|-------------------|
 | children      | Yes             | -                 |
-| isTrue        | No              | true              |
+| isTrue        | Yes             | -                 |
 
 
 ## Examples

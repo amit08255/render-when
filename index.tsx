@@ -1,39 +1,33 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import * as React from 'react';
+import React, { memo, useMemo } from "react";
 
-type WhenProps = {
-    children: React.ReactNode,
-    isTrue?: boolean,
-    limit?: number,
-};
+type WhenProps = React.PropsWithChildren<{
+  condition?: boolean;
+  limit?: number;
+}>;
 
-const RenderWhen = ({ limit, isTrue, children }:WhenProps) => {
-    const list:React.ReactNode[] = [];
+const Wrapper: React.FC<WhenProps> = memo(
+  ({ limit = 1, condition = true, children }) => {
+    const list = useMemo(() => {
+      return React.Children.map(children, (child) => {
+        const { condition: childCondition } = child?.props || {};
 
-    if (isTrue !== true) {
-        return null;
+        if (childCondition && list.length < limit) {
+          return child;
+        }
+      });
+    }, [children, limit]);
+
+    if (!condition) {
+      return null;
     }
 
-    React.Children.map(children, (child:any) => {
-        const { isTrue: isChildTrue } = child?.props || {};
+    return <>{list}</>;
+  }
+);
 
-        if (isChildTrue === true && list.length < limit) {
-            list.push(child);
-        }
-    });
+const If: React.FC<WhenProps> = memo(({ children }) => {
+  return children;
+});
 
-    return (
-        <>
-            {list}
-        </>
-    );
-};
-
-RenderWhen.defaultProps = {
-    limit: 1,
-    isTrue: true,
-};
-
-RenderWhen.If = ({ children, isTrue }) => children;
-
-export default RenderWhen;
+export default { Wrapper, If };

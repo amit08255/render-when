@@ -2,7 +2,7 @@
 
 A zero-dependency lightweight clean conditional rendering component for React.
 
-It works similar to if-else and switch case. If first condition gets true in the children tree, then only that one will be executed. An optional props `limit` will allow to limit the number of true conditions to render at a time. By default `limit` is 1. There is another optional props `isTrue` in ReactWhen which allows you to set condition for entire parent conditional component.
+It works similar to if-else and switch case. If first condition gets true in the children tree, then only that one will be executed. An optional props `limit` will allow to limit the number of true conditions to render at a time. By default `limit` is 1. There is another optional props `isTrue` in RenderWhen which allows you to set condition for entire parent conditional component.
 
 ## RenderWhen Component
 
